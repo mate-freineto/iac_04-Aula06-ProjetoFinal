@@ -1,0 +1,23 @@
+variable "resource_group_location" {
+  type        = string
+  default     = "eastus"
+  description = "Local do grupo de recursos"
+}
+
+variable "resource_group_name_prefix" {
+  type        = string
+  default     = "rg"
+  description = "Prefixo para o grupo de recursos que vai ser combinado com um nome randomico."
+}
+
+variable "username" {
+  type        = string
+  description = "O usuario que vai ser usado pra acessar a VM."
+  default     = "azureadmin"
+}
+
+variable "vm_linux_number" {
+  type        = number
+  description = "Total de VM Linux."
+  default     = 2
+}
