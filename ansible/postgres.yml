@@ -1,0 +1,11 @@
+- hosts: db
+  become: yes
+  tasks:
+    - name: instalar postgres
+      apt: name=postgresql state=latest
+
+    - name: enabling postgresql services
+      service:
+        name: postgresql
+        state: started
+        enabled: yes

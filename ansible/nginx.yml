@@ -1,0 +1,24 @@
+- hosts: web
+  become: yes
+  tasks:
+    - name: instalar Nginx
+      apt: name=nginx state=latest  
+      notify:
+        - reinicia nginx
+
+    - name: iniciar servico Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: started
+
+    - name: Cria arquivo "index.html" com conteudo template
+      template:
+        src: "nginx.html.j2"
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: 0644
+
+  handlers:
+    - name: reinicia nginx
+      service: name=nginx state=reloaded

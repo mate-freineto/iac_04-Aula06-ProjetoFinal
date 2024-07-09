@@ -13,11 +13,27 @@ variable "resource_group_name_prefix" {
 variable "username" {
   type        = string
   description = "O usuario que vai ser usado pra acessar a VM."
-  default     = "azureadmin"
+  default     = "acmeadmin"
 }
 
 variable "vm_linux_number" {
   type        = number
   description = "Total de VM Linux."
   default     = 2
+}
+
+variable "vm_prefix" {
+  type        = string
+  description = "Prexifo utilizado para a criação de VM"
+  default     = "acmeVM"
+}
+
+variable server_web {
+  type = list
+  default = ["acmeVM1"]
+}
+
+variable server_db {
+  type = list(string)
+  default = ["acmeVM2"]
 }

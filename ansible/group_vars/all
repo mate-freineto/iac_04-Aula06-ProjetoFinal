@@ -1,0 +1,3 @@
+datadog_api_key: "<YOUR_DD_API_KEY>"
+local_user: acmeuser
+local_user_pass: aulapuc1234
