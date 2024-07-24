@@ -20,6 +20,4 @@ provider "azurerm" {
   features {
 
   }
-   subscription_id = "${var.az_subscription_id}"
-   tenant_id       = "${var.az_tenant_id}"
 }
