@@ -1,14 +1,3 @@
-variable "az_subscription_id" {
-  description = "The Azure Subscription ID"
-  type        = string
-}
-
-
-variable "az_tenant_id" {
-  description = "The Azure Tenant ID"
-  type        = string
-}
-
 variable "resource_group_location" {
   type        = string
   default     = "eastus"
