@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request: 
+    branches: 
+        - main
 
 jobs:
     terraform:
@@ -14,3 +17,9 @@ jobs:
             
             - name: Setup Terraform
               uses: hashicorp/setup-terraform@v3
+
+            - name: Run init
+              run: terraform init
+
+            - name: create plan 
+              run: terraform plan
