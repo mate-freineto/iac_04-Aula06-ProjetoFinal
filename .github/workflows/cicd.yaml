@@ -9,43 +9,72 @@ on:
         - main
 
 jobs:
-    terraform:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4
-            
-            - name: Setup Terraform
-              uses: hashicorp/setup-terraform@v3
+    tf-fmt-checkov:
+      runs-on: ubuntu-latest
+      steps:
+          - name: Checkout
+            uses: actions/checkout@v4
 
-            - name: Terraform Format
-              run: terraform fmt -check -diff
+          - name: Setup Terraform
+            uses: hashicorp/setup-terraform@v3
 
-            - name: Terraform Linter
-              uses: terraform-linters/setup-tflint@v1
+          - name: Terraform Format
+            run: terraform fmt -check -diff
 
-            - name: Run checkov
-              uses: bridgecrewio/checkov-action@master
-              with:
-                soft_fail: true
+          - name: Terraform Linter
+            uses: terraform-linters/setup-tflint@v1
 
-            - name: Run init
-              run: terraform init
-              env:
-                ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-                ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-                ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-                ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-                TF_VAR_vm_admin_password: ${{ secrets.TF_VAR_VM_ADMIN_PASSWORD }}
+          - name: Run checkov
+            uses: bridgecrewio/checkov-action@master
+            with:
+              soft_fail: true
 
-            - name: create plan 
-              run: terraform plan
-              env:
-                    ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-                    ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-                    ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-                    ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-                    TF_VAR_vm_admin_password: ${{ secrets.TF_VAR_VM_ADMIN_PASSWORD }}
+    tf-init-plan:
+      needs: [tf-fmt-checkov]
+      runs-on: ubuntu-latest
+      steps:
+          - name: Checkout
+            uses: actions/checkout@v4
 
+          - name: Setup Terraform
+            uses: hashicorp/setup-terraform@v3
+
+          - name: Run init
+            run: terraform init
+            env:
+              ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+              ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+              ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+              ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+              TF_VAR_vm_admin_password: ${{ secrets.TF_VAR_VM_ADMIN_PASSWORD }}
+
+          - name: create plan
+            run: terraform plan
+            env:
+                  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+                  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+                  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+                  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+                  TF_VAR_vm_admin_password: ${{ secrets.TF_VAR_VM_ADMIN_PASSWORD }}
+
+    tf-apply:
+      needs: [tf-init-plan]
+      runs-on: ubuntu-latest
+      steps:
+          - name: Checkout
+            uses: actions/checkout@v4
+
+          - name: Setup Terraform
+            uses: hashicorp/setup-terraform@v3
+
+          - name: Terraform apply
+            if: github.ref == 'refs/heads/main'
+            run: terraform apply -auto-approve
+            env:
+              ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+              ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+              ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+              ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+              TF_VAR_vm_admin_password: ${{ secrets.TF_VAR_VM_ADMIN_PASSWORD }}
 
 
