@@ -21,8 +21,13 @@ jobs:
             - name: Terraform Format
               run: terraform fmt -check -diff
 
-            - name: Terraform linters
-              run: terraform-linters/setup-tflint@v1
+            - name: Terraform Linter
+              uses: terraform-linters/setup-tflint@v1
+
+            - name: Run checkov
+              uses: bridgecrewio/checkov-action@master
+              with:
+                soft_fail: true
 
             - name: Run init
               run: terraform init
