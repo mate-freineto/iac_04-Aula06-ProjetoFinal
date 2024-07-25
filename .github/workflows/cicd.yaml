@@ -21,6 +21,9 @@ jobs:
             - name: Terraform Format
               run: terraform fmt -check -diff
 
+            - name: Terraform linters
+              run: terraform-linters/setup-tflint@v1
+
             - name: Run init
               run: terraform init
 
