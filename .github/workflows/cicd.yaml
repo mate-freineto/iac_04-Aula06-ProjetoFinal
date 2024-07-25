@@ -29,7 +29,7 @@ jobs:
             with:
               soft_fail: true
 
-    tf-init-plan:
+    tf-init-plan-apply:
       needs: [tf-fmt-checkov]
       runs-on: ubuntu-latest
       steps:
@@ -56,16 +56,6 @@ jobs:
                   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
                   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
                   TF_VAR_vm_admin_password: ${{ secrets.TF_VAR_VM_ADMIN_PASSWORD }}
-
-    tf-apply:
-      needs: [tf-init-plan]
-      runs-on: ubuntu-latest
-      steps:
-          - name: Checkout
-            uses: actions/checkout@v4
-
-          - name: Setup Terraform
-            uses: hashicorp/setup-terraform@v3
 
           - name: Terraform apply
             if: github.ref == 'refs/heads/main'
