@@ -28,6 +28,6 @@ resource "azurerm_linux_virtual_machine" "student-vm" {
     storage_account_uri = azurerm_storage_account.my_vm_storage_account_student.primary_blob_endpoint
   }
 
-  depends_on = [ azurerm_network_interface_security_group_association.nicNSG_student ]
+  depends_on = [azurerm_network_interface_security_group_association.nicNSG_student]
 
 }

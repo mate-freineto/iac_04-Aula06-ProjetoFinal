@@ -19,10 +19,10 @@ resource "azurerm_subnet" "student-subnet" {
 }
 
 resource "azurerm_public_ip" "student-pip" {
-   name                = "student-pip"
-   location            = azurerm_resource_group.rg.location
-   resource_group_name = azurerm_resource_group.rg.name
-   allocation_method   = "Dynamic"
+  name                = "student-pip"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  allocation_method   = "Dynamic"
 }
 
 

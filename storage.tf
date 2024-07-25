@@ -7,7 +7,7 @@ resource "random_id" "random_vm_id_student" {
 }
 
 resource "azurerm_storage_account" "my_vm_storage_account_student" {
-  
+
   name                     = "diagstudent"
   location                 = azurerm_resource_group.rg.location
   resource_group_name      = azurerm_resource_group.rg.name
