@@ -16,6 +16,6 @@ variable "username" {
   default     = "acmeadmin"
 }
 
-variable "admin_password" {
+variable "vm_admin_password" {
   type        = string
 }

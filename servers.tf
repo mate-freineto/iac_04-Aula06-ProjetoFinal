@@ -19,7 +19,7 @@ resource "azurerm_linux_virtual_machine" "student-vm" {
   }
   computer_name  = "student-vm"
   admin_username = var.username
-  admin_password = var.admin_password
+  admin_password = var.vm_admin_password
   admin_ssh_key {
     username   = var.username
     public_key = azapi_resource_action.ssh_public_key_gen.output.publicKey
