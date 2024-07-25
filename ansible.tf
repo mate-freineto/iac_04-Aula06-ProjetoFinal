@@ -1,11 +1,8 @@
-# Gerar um inventario das VMs
-resource "local_file" "hosts_cfg" {
-  content = templatefile("inventory.tpl",
-    {
-      vms_web      = azurerm_linux_virtual_machine.acmeVM_web
-      vms_db      = azurerm_linux_virtual_machine.acmeVM_db
-      username = var.username
-    }
-  )
-  filename = "./ansible/inventory.yml"
+# Generate inventory file
+resource "local_file" "inventory" {
+ filename = "./ansible/inventory.ini"
+ content = <<EOF
+[webserver]
+${azurerm_linux_virtual_machine.student-vm.public_ip_address}
+EOF
 }

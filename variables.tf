@@ -16,24 +16,6 @@ variable "username" {
   default     = "acmeadmin"
 }
 
-variable "vm_linux_number" {
-  type        = number
-  description = "Total de VM Linux."
-  default     = 2
-}
-
-variable "vm_prefix" {
+variable "admin_password" {
   type        = string
-  description = "Prexifo utilizado para a criação de VM"
-  default     = "acmeVM"
-}
-
-variable server_web {
-  type = list
-  default = ["acmeVM1"]
-}
-
-variable server_db {
-  type = list(string)
-  default = ["acmeVM2"]
 }
