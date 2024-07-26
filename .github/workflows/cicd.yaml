@@ -69,6 +69,7 @@ jobs:
 
           - name: Run Ansible playbook
             run: |
+              chmod 400 private_key.pem
               ansible --version
               ansible-galaxy collection list
               ansible-playbook playbook.yml -i inventory.ini --private-key private_key.pem
