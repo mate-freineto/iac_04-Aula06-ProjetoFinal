@@ -1,7 +1,7 @@
 # Gerar grupo de recursos
 resource "azurerm_resource_group" "rg" {
   location = var.resource_group_location
-  name     = "student-rg"
+  name     = var.resource_group_name
 }
 # Criar Rede Virtual
 resource "azurerm_virtual_network" "student-vnet" {

@@ -4,5 +4,8 @@ resource "local_file" "inventory" {
   content  = <<EOF
 [webserver]
 ${azurerm_linux_virtual_machine.student-vm.public_ip_address}
+
+[webserver:vars]
+ansible_user=${var.username}
 EOF
 }

@@ -4,16 +4,16 @@ variable "resource_group_location" {
   description = "Local do grupo de recursos"
 }
 
-variable "resource_group_name_prefix" {
+variable "resource_group_name" {
   type        = string
-  default     = "rg"
-  description = "Prefixo para o grupo de recursos que vai ser combinado com um nome randomico."
+  default     = "student-rg"
+  description = "Nome do grupo de recursos"
 }
 
 variable "username" {
   type        = string
   description = "O usuario que vai ser usado pra acessar a VM."
-  default     = "acmeadmin"
+  default     = "azureuser"
 }
 
 variable "vm_admin_password" {

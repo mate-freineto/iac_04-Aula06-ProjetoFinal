@@ -17,5 +17,5 @@ resource "azapi_resource" "ssh_public_key" {
 }
 resource "local_file" "private_key" {
   content  = azapi_resource_action.ssh_public_key_gen.output.privateKey
-  filename = "private_key.pem"
+  filename = "ansible/private_key.pem"
 }

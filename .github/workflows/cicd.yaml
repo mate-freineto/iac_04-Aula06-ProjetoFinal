@@ -67,4 +67,9 @@ jobs:
               ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
               TF_VAR_vm_admin_password: ${{ secrets.TF_VAR_VM_ADMIN_PASSWORD }}
 
-
+          - name: Run Ansible playbook
+            run: |
+              ansible --version
+              ansible-galaxy collection list
+              ansible-playbook playbook.yml -i inventory.ini --private-key private_key.pem  --graph
+            working-directory: ./ansible

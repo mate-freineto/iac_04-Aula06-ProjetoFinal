@@ -1,7 +1,0 @@
-- hosts: all
-  gather_facts: true
-  become: yes
-  tasks:
-    - name: Import the Datadog Agent role from the Datadog collection
-      import_role:
-        name: datadog.dd.agent

@@ -4,8 +4,8 @@ resource "azurerm_linux_virtual_machine" "student-vm" {
   name                  = "student-vm"
   location              = azurerm_resource_group.rg.location
   resource_group_name   = azurerm_resource_group.rg.name
-  network_interface_ids = [azurerm_network_interface.nic_student.id]
-  size                  = "Standard_DS1_v2"
+  network_interface_ids = [azurerm_network_interface.student-nic.id]
+  size                  = "Standard_B1s"
   os_disk {
     name                 = "Vstudent-vm_Disk"
     caching              = "ReadWrite"
